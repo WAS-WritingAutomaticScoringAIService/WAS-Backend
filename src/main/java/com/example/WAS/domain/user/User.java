@@ -1,7 +1,12 @@
-package com.example.WAS.domain;
+package com.example.WAS.domain.user;
 
+import com.example.WAS.domain.Role;
 import com.example.WAS.domain.base.BaseTimeEntity;
 import lombok.*;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 import javax.persistence.*;
 
@@ -28,7 +33,7 @@ public class User extends BaseTimeEntity {
 
     // 소속 기관
     @Column(nullable = false, length = 100)
-    private String group;
+    private String position;
 
     // 학번, 교번
     @Column(nullable = false, length = 100)
@@ -40,4 +45,20 @@ public class User extends BaseTimeEntity {
 
     @Enumerated(EnumType.STRING)
     private Role role;
+
+    public void addUserAuthority() {
+        this.role = Role.USER;
+    }
+
+    // 비밀번호 암호화
+    public User encodePassword(PasswordEncoder passwordEncoder){
+        this.password = passwordEncoder.encode(password);
+        return this;
+    }
+
+    // 비밀번호 확인
+    public boolean checkPassword(PasswordEncoder passwordEncoder, String password) {
+        return passwordEncoder.matches(this.password, password);
+    }
+
 }
