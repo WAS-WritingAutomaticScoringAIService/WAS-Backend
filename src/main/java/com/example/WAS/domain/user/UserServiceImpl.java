@@ -27,9 +27,9 @@ public class UserServiceImpl implements UserService {
             throw new Exception("이미 존재하는 이메일입니다.");
         }
 
-//        if (!request.getPassword().equals(request.getCheckedPassword())) {
-//            throw new Exception("비밀번호가 일치하지 않습니다.");
-//        }
+        if (!request.getPassword().equals(request.getCheckedPassword())) {
+            throw new Exception("비밀번호가 일치하지 않습니다.");
+        }
 
         User user = userRepository.save(request.toEntity());
         user.encodePassword(passwordEncoder);
@@ -44,8 +44,7 @@ public class UserServiceImpl implements UserService {
         User user = userRepository.findByEmail(users.get("email"))
                 .orElseThrow(() -> new IllegalArgumentException("가입되지 않은 Email 입니다."));
 
-        // String password = users.get("password");
-        String password = user.getPassword();
+        String password = users.get("password");
         if (!user.checkPassword(passwordEncoder, password)) {
             throw new IllegalArgumentException("잘못된 비밀번호입니다.");
         }

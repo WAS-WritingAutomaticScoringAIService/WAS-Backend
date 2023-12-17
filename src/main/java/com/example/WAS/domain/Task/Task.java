@@ -16,7 +16,7 @@ public class Task {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Integer id;
+    private Long id;
 
     @Column(nullable = false)
     private String title;
@@ -29,12 +29,11 @@ public class Task {
     private Integer cls;
 
     @Column(nullable = false)
-    private String question;
-
-    @Column(nullable = false)
     private LocalDateTime startTime;
 
     @Column(nullable = false)
     private LocalDateTime endTime;
 
+    public Task(Task toEntity) {
+    }
 }

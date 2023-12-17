@@ -17,7 +17,7 @@ public class SignUpRequest {
     private String department;
 
     public User toEntity() {
-        User user = User.builder()
+        return User.builder()
                 .email(email)
                 .password(password)
                 .username(username)
@@ -26,6 +26,5 @@ public class SignUpRequest {
                 .number(number)
                 .department(department)
                 .build();
-        return user;
     }
 }
