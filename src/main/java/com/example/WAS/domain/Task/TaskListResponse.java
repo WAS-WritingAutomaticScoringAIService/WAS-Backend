@@ -7,6 +7,7 @@ import java.time.LocalDateTime;
 
 @Getter
 @AllArgsConstructor
+
 // 게시판 전체 목록 조회 시 넘겨줄 response
 public class TaskListResponse {
 

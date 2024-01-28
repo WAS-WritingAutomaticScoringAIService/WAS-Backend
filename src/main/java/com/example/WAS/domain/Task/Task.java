@@ -26,7 +26,7 @@ public class Task {
 
     // 분반
     @Column(nullable = false)
-    private Integer cls;
+    private String cls;
 
     @Column(nullable = false)
     private LocalDateTime startTime;
@@ -34,6 +34,4 @@ public class Task {
     @Column(nullable = false)
     private LocalDateTime endTime;
 
-    public Task(Task toEntity) {
-    }
 }

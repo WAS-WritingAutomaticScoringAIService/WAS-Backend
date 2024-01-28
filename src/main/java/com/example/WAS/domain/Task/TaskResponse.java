@@ -13,7 +13,7 @@ public class TaskResponse {
     private String title;
     private String subject;
     // 분반
-    private Integer cls;
+    private String cls;
     private LocalDateTime startTime;
     private LocalDateTime endTime;
 

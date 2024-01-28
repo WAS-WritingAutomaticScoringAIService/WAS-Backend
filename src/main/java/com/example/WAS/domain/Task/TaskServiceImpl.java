@@ -1,5 +1,6 @@
 package com.example.WAS.domain.Task;
 
+import com.example.WAS.domain.user.User;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -10,19 +11,31 @@ import java.util.List;
 @RequiredArgsConstructor
 @Service
 @Transactional(readOnly = true)
-public class TaskServiceImpl {
+public class TaskServiceImpl implements TaskService {
 
     private final TaskRepository taskRepository;
 
-    public TaskResponse createTask(TaskRequest request) throws Exception {
+//    @Override
+//    public TaskResponse createTask(TaskRequest request) throws Exception {
+//
+//        Task task = taskRepository.save(request.toEntity());
+//        return new TaskResponse(task);
+//    }
 
-        Task task = new Task(request.toEntity());
-        taskRepository.save(task);
+    @Override
+    public Long createTask(TaskRequest request) throws Exception {
 
-        return new TaskResponse(task);
+        Task task = taskRepository.save(request.toEntity());
+        return task.getId();
+    }
+
+    @Override
+    public List<Task> search(String keyword) {
+        return null;
     }
 
     // 모든 과제 가져오기
+    @Override
     public List<TaskListResponse> findAllTask() {
         List<Task> taskList = taskRepository.findAll();
         List<TaskListResponse> responses = new ArrayList<>();
@@ -33,14 +46,12 @@ public class TaskServiceImpl {
         return responses;
     }
 
-    public List<TaskListResponse> search(String keyword) {
-        List<TaskListResponse> taskList = taskRepository.findAllBySubject(keyword);
-
-        return  taskList;
-    }
-
-
-
+//    @Override
+//    public List<TaskListResponse> search(String keyword) {
+//        List<TaskListResponse> taskList = taskRepository.findAllBySubject(keyword);
+//
+//        return  taskList;
+//    }
 
 
 }

@@ -2,17 +2,19 @@ package com.example.WAS.domain.Task;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import java.time.LocalDateTime;
 
 @Getter
+@Setter
 @NoArgsConstructor
 public class TaskRequest {
 
     private String title;
     private String subject;
     // 분반
-    private Integer cls;
+    private String cls;
     private LocalDateTime startTime;
     private LocalDateTime endTime;
 
