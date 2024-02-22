@@ -21,8 +21,8 @@ public class TaskResponse {
     public TaskResponse(Task task) {
         this.title = task.getTitle();
         this.subject = task.getSubject();
-        this.cls = getCls();
-        this.startTime =getStartTime();
-        this.endTime = getEndTime();
+        this.cls = task.getCls();
+        this.startTime = task.getStartTime();
+        this.endTime = task.getEndTime();
     }
 }

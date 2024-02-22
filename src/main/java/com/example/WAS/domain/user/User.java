@@ -1,12 +1,15 @@
 package com.example.WAS.domain.user;
 
 import com.example.WAS.domain.Role;
+import com.example.WAS.domain.Task.Task;
 import com.example.WAS.domain.base.BaseTimeEntity;
 import lombok.*;
+import org.springframework.security.crypto.bcrypt.BCrypt;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.Mapping;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Builder
 @Getter
@@ -43,6 +46,9 @@ public class User extends BaseTimeEntity {
 
     @Enumerated(EnumType.STRING)
     private Role role;
+
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+    private List<Task> tasks;
 
     public void addUserAuthority() {
         this.role = Role.USER;

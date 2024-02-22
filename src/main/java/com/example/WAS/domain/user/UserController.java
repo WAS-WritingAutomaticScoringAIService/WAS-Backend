@@ -1,8 +1,5 @@
 package com.example.WAS.domain.user;
 
-import com.example.WAS.domain.user.SignUpRequest;
-import com.example.WAS.domain.user.UserRepository;
-import com.example.WAS.domain.user.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;

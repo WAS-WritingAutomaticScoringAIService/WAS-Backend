@@ -9,7 +9,7 @@ public class SignUpRequest {
 
     private String email;
     private String password;
-    private String checkedPassword;
+    // private String checkedPassword;
     private String username;
     private Role role;
     private String position;

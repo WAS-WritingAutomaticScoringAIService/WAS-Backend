@@ -9,8 +9,8 @@ import java.util.List;
 @Transactional
 public interface TaskService {
 
-    public Long createTask(TaskRequest request) throws Exception;
-    public List<Task> search(String keyword);
+    public Task createTask(TaskRequest request) throws Exception;
+    public List<TaskListResponse> search(String keyword);
     public List<TaskListResponse> findAllTask();
 
 }

@@ -1,6 +1,5 @@
 package com.example.WAS.domain.question;
 
-import com.example.WAS.domain.user.User;
 import lombok.RequiredArgsConstructor;
 import org.hibernate.Session;
 import org.springframework.stereotype.Service;
@@ -17,7 +16,6 @@ public class QuestionServiceImpl implements QuestionService {
 
     @Override
     public void save(QuestionRequest request) {
-
         Question question = questionRepository.save(request.toEntity());
     }
 

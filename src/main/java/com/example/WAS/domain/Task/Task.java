@@ -1,9 +1,13 @@
 package com.example.WAS.domain.Task;
 
+import com.example.WAS.domain.question.Question;
+import com.example.WAS.domain.user.User;
 import lombok.*;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 @Builder
 @Getter
@@ -33,5 +37,12 @@ public class Task {
 
     @Column(nullable = false)
     private LocalDateTime endTime;
+
+    @ManyToOne
+    @JoinColumn(name = "user_id")
+    private User user;
+
+    @OneToMany(mappedBy = "task", cascade = CascadeType.ALL)
+    private List<Question> questions = new ArrayList<>();
 
 }

@@ -3,6 +3,8 @@ package com.example.WAS.domain.user;
 import com.example.WAS.jwt.JwtTokenProvider;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCrypt;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -33,7 +35,19 @@ public class UserServiceImpl implements UserService {
 //        }
 
         User user = userRepository.save(request.toEntity());
-        user.encodePassword(passwordEncoder);
+
+        String password = user.getPassword();
+
+        // BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+
+        String salt = BCrypt.gensalt();
+        String hashedPassword = BCrypt.hashpw(password, salt);
+
+        user.setPassword(hashedPassword);
+        // String encodedPassword = encoder.encode(password);
+       // user.setPassword(encodedPassword);
+
+        //user.encodePassword(passwordEncoder);
 
         user.addUserAuthority();
         return user.getId();
@@ -44,14 +58,20 @@ public class UserServiceImpl implements UserService {
 
         User user = userRepository.findByEmail(users.get("email"))
                 .orElseThrow(() -> new IllegalArgumentException("가입되지 않은 Email 입니다."));
+        System.out.println(user);
 
         String password = users.get("password");
-        if (!user.checkPassword(passwordEncoder, password)) {
+
+        System.out.println(user.getPassword());
+        if (!BCrypt.checkpw(password,user.getPassword())) {
             throw new IllegalArgumentException("잘못된 비밀번호입니다.");
         }
 
+
         List<String> roles = new ArrayList<>();
         roles.add(user.getRole().name());
+
+        System.out.println("OK");
 
         return jwtTokenProvider.createToken(user.getUsername(), roles);
     }

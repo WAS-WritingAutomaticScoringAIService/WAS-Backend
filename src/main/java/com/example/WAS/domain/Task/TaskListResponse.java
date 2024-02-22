@@ -14,7 +14,7 @@ public class TaskListResponse {
     private String title;
     private String subject;
     // 분반
-    private Integer cls;
+    private String cls;
     private LocalDateTime endTime;
 
 //    public Task toEntity() {
@@ -29,7 +29,7 @@ public class TaskListResponse {
     public TaskListResponse(Task task) {
         this.title = task.getTitle();
         this.subject = task.getSubject();
-        this.cls = getCls();
-        this.endTime = getEndTime();
+        this.cls = task.getCls();
+        this.endTime = task.getEndTime();
     }
 }

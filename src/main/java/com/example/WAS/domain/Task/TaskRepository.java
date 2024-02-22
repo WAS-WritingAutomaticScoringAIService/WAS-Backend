@@ -10,7 +10,7 @@ import java.util.List;
 @Repository
 public interface TaskRepository extends JpaRepository<Task, Long> {
 
-    List<TaskListResponse> findAllBySubject(String subject);
+    List<Task> findBySubjectContaining(String subject);
     Page<Task> findAll(Pageable pageable);
 
 

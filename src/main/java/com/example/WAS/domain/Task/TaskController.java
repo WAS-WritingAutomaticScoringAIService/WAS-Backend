@@ -6,6 +6,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.List;
 import java.util.Optional;
 
 @RestController
@@ -17,12 +18,18 @@ public class TaskController {
 
     @PostMapping("/task/create")
     @ResponseStatus(HttpStatus.OK)
-    public Long crateTask(@Valid @RequestBody TaskRequest request) throws Exception {
-
+    public Task crateTask(@Valid @RequestBody TaskRequest request) throws Exception {
         return taskService.createTask(request);
     }
 
+    @GetMapping("/task/list")
+    public List<TaskListResponse> findAllTask() throws Exception {
+        return taskService.findAllTask();
+    }
 
-
+    @GetMapping("/task/list/search")
+    public List<TaskListResponse> Search(@RequestParam(value = "keyword") String keyword) throws Exception {
+        return taskService.search(keyword);
+    }
 
 }
