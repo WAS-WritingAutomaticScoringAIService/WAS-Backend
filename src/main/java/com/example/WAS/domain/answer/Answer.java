@@ -24,4 +24,6 @@ public class Answer {
     @JoinColumn(name = "ques_num")
     private Question question;
 
+    //test
+
 }
