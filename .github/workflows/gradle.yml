@@ -45,7 +45,7 @@ jobs:
         
     # Jar 파일 복사
     - name: Copy Jar
-      run: cp ./out/artifacts/WAS_jar/*.jar ./deploy
+      run: cp ./out/artifacts/WAS_jar/WAS.jar ./deploy
 
     - name: Make zip file
       run: zip -r ./coinTalk.zip ./deploy
