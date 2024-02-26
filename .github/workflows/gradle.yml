@@ -34,7 +34,7 @@ jobs:
 
       # build한 후 프로젝트를 압축한다.
     - name: Make zip file
-      run: zip -r ./practice-deploy.zip .
+      run: zip -r ./$GITHUB_SHA.zip .
       shell: bash
       
     # gradlew 실행 권한 부여
