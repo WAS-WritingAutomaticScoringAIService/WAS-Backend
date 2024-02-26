@@ -9,7 +9,7 @@ on:
 
 env:
   S3_BUCKET_NAME: was-deploy
-  CODE_DEPLOY_APPLICATION_NAME: was-ec2
+  CODE_DEPLOY_APPLICATION_NAME: was-ec2-deploy
   CODE_DEPLOY_DEPLOYMENT_GROUP_NAME: was-codedeploy
 
 jobs:
