@@ -14,5 +14,5 @@ public class WasApplication {
 		SpringApplication.run(WasApplication.class, args);
 	}
 
-	// test
+	// test 2
 }
