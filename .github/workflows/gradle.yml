@@ -45,7 +45,6 @@ jobs:
         aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
         aws-region: ap-northeast-2
 
-      
     # (5)빌드 결과물을 S3버킷에 업로드
     - name: Upload to AWS S3
       run: |
@@ -62,7 +61,7 @@ jobs:
             --application-name ${{ env.CODE_DEPLOY_APPLICATION_NAME }} \\
             --deployment-config-name CodeDeployDefault.AllAtOnce \\
             --deployment-group-name ${{ env.CODE_DEPLOY_DEPLOYMENT_GROUP_NAME }} \\
-            --s3-location bucket=$S3_BUCKET_NAME,key=$GITHUB_SHA.zip,bundleType=zip
+            --s3-location bucket=$S3_BUCKET_NAME,key=WAS-Backend.zip,bundleType=zip
 
   dependency-submission:
 
