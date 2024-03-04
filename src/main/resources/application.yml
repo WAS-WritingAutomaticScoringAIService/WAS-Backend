@@ -2,7 +2,7 @@ server.port: 8080
 spring:
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://localhost:3306/was_db?serverTimezone=UTC&characterEncoding=UTF-8
+    url: jdbc:mysql://43.203.210.184:3306/was_db?serverTimezone=UTC&characterEncoding=UTF-8
     username: root
     password: Si8zcqt5!
 
