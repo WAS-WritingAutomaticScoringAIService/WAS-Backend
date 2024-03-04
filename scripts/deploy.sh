@@ -1,27 +1,29 @@
-!/bin/bash
-BUILD_JAR=$(ls /home/ubuntu/action/build/libs/WAS-0.0.1-SNAPSHOT.jar)
-JAR_NAME=$(basename $BUILD_JAR)
+#!/bin/bash
 
-echo "> 현재 시간: $(date)" >> /home/ubuntu/action/deploy.log
+echo "> Checking pid of the running application..."
 
-echo "> build 파일명: $JAR_NAME" >> /home/ubuntu/action/deploy.log
+APP_BASE_PATH=/home/ubuntu/app/
 
-echo "> build 파일 복사" >> /home/ubuntu/action/deploy.log
-DEPLOY_PATH=/home/ubuntu/action/
-cp $BUILD_JAR $DEPLOY_PATH
+CURRENT_PID=$(pgrep -f was)
 
-echo "> 현재 실행중인 애플리케이션 pid 확인" >> /home/ubuntu/action/deploy.log
-CURRENT_PID=$(pgrep -f $JAR_NAME)
+echo "PID = $CURRENT_PID"
 
-if [ -z $CURRENT_PID ]
-then
-  echo "> 현재 구동중인 애플리케이션이 없으므로 종료하지 않습니다." >> /home/ubuntu/action/deploy.log
+if [ -z $CURRENT_PID ]; then
+    echo "> There is no running application."
 else
-  echo "> kill -9 $CURRENT_PID" >> /home/ubuntu/action/deploy.log
-  sudo kill -9 $CURRENT_PID
-  sleep 5
+    echo "> kill -15 $CURRENT_PID"
+    kill -15 $CURRENT_PID
+    sleep 5
 fi
 
-DEPLOY_JAR=$DEPLOY_PATH$JAR_NAME
-echo "> DEPLOY_JAR 배포"    >> /home/ubuntu/action/deploy.log
-sudo nohup java -jar $DEPLOY_JAR >> /home/ubuntu/deploy.log 2>/home/ubuntu/action/deploy_err.log &
+echo "> Deploying a new application..."
+
+echo "> Copy jar files"
+
+cp $APP_BASE_PATH/deploy/build/libs/*.jar $APP_BASE_PATH/jar/
+
+JAR_NAME=$(ls -tr $APP_BASE_PATH/jar/ | grep 'was' | tail -n 1)
+
+echo "> JAR Name: $JAR_NAME"
+
+nohup java -jar $APP_BASE_PATH/jar/$JAR_NAME &
