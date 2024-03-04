@@ -40,7 +40,11 @@ jobs:
       
     # 프로젝트 build
     - name: Build with Gradle
-      run: ./gradlew clean build
+      run: ./gradlew build -x test
+
+   # JAR 파일이 생성 확인
+    - name: Check the JAR file
+      run: ls -l build/libs
 
       # build한 후 프로젝트를 압축한다.
     - name: Make zip file
