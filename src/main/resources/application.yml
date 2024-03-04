@@ -4,7 +4,7 @@ spring:
     driver-class-name: com.mysql.cj.jdbc.Driver
     url: jdbc:mysql://localhost:3306/was_db?serverTimezone=UTC&characterEncoding=UTF-8
     username: root
-    password: si8zcqt5
+    password: Si8zcqt5!
 
   security:
     allow-localhost: true
