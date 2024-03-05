@@ -1,4 +1,4 @@
-!/bin/bash
+#!/bin/bash
 BUILD_JAR=$(ls /home/ubuntu/action/build/libs/WAS-0.0.1-SNAPSHOT.jar)
 JAR_NAME=$(basename $BUILD_JAR)
 
