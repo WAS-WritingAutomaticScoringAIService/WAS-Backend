@@ -14,5 +14,5 @@ public class WasApplication {
 		SpringApplication.run(WasApplication.class, args);
 	}
 
-	// test 5
+	// 서버 연결용 commit
 }
