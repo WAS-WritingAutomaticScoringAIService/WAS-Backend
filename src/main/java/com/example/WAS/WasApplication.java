@@ -14,5 +14,5 @@ public class WasApplication {
 		SpringApplication.run(WasApplication.class, args);
 	}
 
-	// 서버 연결용 commit 8
+	// 서버 연결용 commit
 }
