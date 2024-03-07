@@ -18,7 +18,7 @@ public class TaskController {
 
     @PostMapping("/task/create")
     @ResponseStatus(HttpStatus.OK)
-    public Task crateTask(@Valid @RequestBody TaskRequest request) throws Exception {
+    public Taskdto crateTask(@Valid @RequestBody TaskRequest request) throws Exception {
         return taskService.createTask(request);
     }
 

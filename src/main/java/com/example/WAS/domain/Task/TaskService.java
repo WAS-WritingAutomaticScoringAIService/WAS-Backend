@@ -9,7 +9,7 @@ import java.util.List;
 @Transactional
 public interface TaskService {
 
-    public Task createTask(TaskRequest request) throws Exception;
+    public Taskdto createTask(TaskRequest request) throws Exception;
     public List<TaskListResponse> search(String keyword);
     public List<TaskListResponse> findAllTask();
 

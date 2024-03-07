@@ -15,7 +15,7 @@ import java.util.stream.Collectors;
 
 @RequiredArgsConstructor
 @Service
-@Transactional(readOnly = true)
+@Transactional
 public class TaskServiceImpl implements TaskService {
 
     private final TaskRepository taskRepository;
@@ -30,30 +30,44 @@ public class TaskServiceImpl implements TaskService {
 //    }
 
     @Override
-    public Task createTask(TaskRequest request) throws Exception {
+    public Taskdto createTask(TaskRequest request) throws Exception {
 
-        Task task = new Task();
-        task.setUser(request.getUser());
-        task.setTitle(request.getTitle());
-        task.setSubject(request.getSubject());
-        task.setCls(request.getCls());
-        task.setStartTime(request.getStartTime());
-        task.setEndTime(request.getEndTime());
-        task.setQuestions(request.getQuestions());
+        Task task = Task.builder()
+//                .user(request.getUser())
+                .title(request.getTitle())
+                .subject(request.getSubject())
+                .cls(request.getCls())
+                .startTime(request.getStartTime())
+                .endTime(request.getEndTime())
+                .questions(null)
+                .build();
+        taskRepository.save(task);
 
         List<Question> questions = request.getQuestions().stream()
                 .map(questionDto -> {
-                    Question question = new Question();
-                    question.setQuesNum(question.getQuesNum());
-                    question.setContent(question.getContent());
-                    question.setTask(question.getTask());
-                    questionRepository.save(question);
-                    return question;
+                    Question q = Question.builder()
+                            .QuesNum(questionDto.getQuesNum())
+                            .content(questionDto.getContent())
+                            .task(task)
+                            .build();
+                    System.out.println("questionDto.getQuesNum() : " + questionDto.getQuesNum());
+                    System.out.println("Task.getId() : " + task.getId());
+                    questionRepository.save(q);
+                    return q;
                 })
                 .collect(Collectors.toList());
 
         task.setQuestions(questions);
-        return taskRepository.save(task);
+
+        return Taskdto.builder()
+                .id(task.getId())
+                .title(task.getTitle())
+                .subject(task.getSubject())
+                .cls(task.getCls())
+                .startTime(task.getStartTime())
+                .endTime(task.getEndTime())
+                .questions(questions)
+                .build();
 
     }
 

@@ -47,8 +47,8 @@ public class User extends BaseTimeEntity {
     @Enumerated(EnumType.STRING)
     private Role role;
 
-    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
-    private List<Task> tasks;
+//    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+//    private List<Task> tasks;
 
     public void addUserAuthority() {
         this.role = Role.USER;

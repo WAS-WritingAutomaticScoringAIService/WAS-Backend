@@ -22,11 +22,11 @@ public class TaskRequest {
     private LocalDateTime startTime;
     private LocalDateTime endTime;
     private List<Question> questions;
-    private User user;
+//    private User user;
 
     public Task toEntity() {
         return Task.builder()
-                .user(user)
+//                .user(user)
                 .title(title)
                 .subject(subject)
                 .cls(cls)
