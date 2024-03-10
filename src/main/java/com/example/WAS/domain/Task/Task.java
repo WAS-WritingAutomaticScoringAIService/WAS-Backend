@@ -1,5 +1,6 @@
 package com.example.WAS.domain.Task;
 
+import com.example.WAS.domain.answer.Answer;
 import com.example.WAS.domain.question.Question;
 import com.example.WAS.domain.user.User;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
@@ -46,5 +47,9 @@ public class Task {
     @JsonManagedReference
     @OneToMany(mappedBy = "task", cascade = CascadeType.ALL)
     private List<Question> questions = new ArrayList<>();
+
+    @JsonManagedReference
+    @OneToMany(mappedBy = "task", cascade = CascadeType.ALL)
+    private List<Answer> answers = new ArrayList<>();
 
 }

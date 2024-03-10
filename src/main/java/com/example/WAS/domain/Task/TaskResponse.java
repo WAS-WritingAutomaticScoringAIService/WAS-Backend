@@ -17,7 +17,6 @@ public class TaskResponse {
     private LocalDateTime startTime;
     private LocalDateTime endTime;
 
-
     public TaskResponse(Task task) {
         this.title = task.getTitle();
         this.subject = task.getSubject();

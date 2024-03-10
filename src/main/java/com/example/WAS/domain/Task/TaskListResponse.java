@@ -17,15 +17,6 @@ public class TaskListResponse {
     private String cls;
     private LocalDateTime endTime;
 
-//    public Task toEntity() {
-//        return Task.builder()
-//                .title(title)
-//                .subject(subject)
-//                .cls(cls)
-//                .endTime(endTime)
-//                .build();
-//    }
-
     public TaskListResponse(Task task) {
         this.title = task.getTitle();
         this.subject = task.getSubject();

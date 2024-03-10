@@ -1,16 +1,19 @@
 package com.example.WAS.domain.Task;
 
+import com.example.WAS.domain.answer.Answer;
+import com.example.WAS.domain.answer.AnswerRepository;
+import com.example.WAS.domain.answer.AnswerRequest;
 import com.example.WAS.domain.question.Question;
 import com.example.WAS.domain.question.QuestionRepository;
-import com.example.WAS.domain.question.QuestionService;
-import com.example.WAS.domain.user.User;
 import com.example.WAS.domain.user.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.bind.annotation.PathVariable;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @RequiredArgsConstructor
@@ -21,6 +24,7 @@ public class TaskServiceImpl implements TaskService {
     private final TaskRepository taskRepository;
     private final UserRepository userRepository;
     private final QuestionRepository questionRepository;
+    private final AnswerRepository answerRepository;
 
 //    @Override
 //    public Long createTask(TaskRequest request) throws Exception {
@@ -68,7 +72,6 @@ public class TaskServiceImpl implements TaskService {
                 .endTime(task.getEndTime())
                 .questions(questions)
                 .build();
-
     }
 
     // 모든 과제 가져오기
@@ -97,6 +100,11 @@ public class TaskServiceImpl implements TaskService {
 
         return responses;
     }
+
+
+
+
+
 
 
 }

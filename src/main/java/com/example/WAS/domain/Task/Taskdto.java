@@ -16,15 +16,10 @@ import java.util.List;
 public class Taskdto {
 
     private Long id;
-
     private String title;
-
     private String subject;
-
     private String cls;
-
     private LocalDateTime startTime;
-
     private LocalDateTime endTime;
 
 //    private User user;

@@ -2,6 +2,7 @@ package com.example.WAS.config;
 
 import lombok.AllArgsConstructor;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
@@ -49,8 +50,13 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         auth
                 .userDetailsService(userDetailsService)
                 .passwordEncoder(passwordEncoder());
-               // .passwordEncoder(passwordEncoder().encode("password"))
-               // .roles("USER");
+    }
+    @Autowired
+    public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
+        auth
+                // 사용자 인증 정보 로드 방식 설정
+                .inMemoryAuthentication()
+                .withUser("user").password("{noop}password").roles("USER");
     }
 
     @Bean
