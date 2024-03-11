@@ -38,16 +38,11 @@ public class UserServiceImpl implements UserService {
 
         String password = user.getPassword();
 
-        // BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
-
         String salt = BCrypt.gensalt();
         String hashedPassword = BCrypt.hashpw(password, salt);
 
         user.setPassword(hashedPassword);
-        // String encodedPassword = encoder.encode(password);
-       // user.setPassword(encodedPassword);
 
-        //user.encodePassword(passwordEncoder);
 
         user.addUserAuthority();
         return user.getId();
