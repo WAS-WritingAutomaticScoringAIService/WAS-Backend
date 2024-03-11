@@ -10,7 +10,7 @@ import java.util.Map;
 @RestController
 @RequiredArgsConstructor
 @RequestMapping(value = "/user", produces = "application/json")
-@CrossOrigin(origins = "http://43.202.60.41:8080/") // 컨트롤러에서 설정
+@CrossOrigin(origins = "*") // 컨트롤러에서 설정
 public class UserController {
 
     private final UserService userService;
