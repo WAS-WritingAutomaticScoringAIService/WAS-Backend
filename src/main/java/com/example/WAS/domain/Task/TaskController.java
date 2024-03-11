@@ -28,32 +28,32 @@ public class TaskController {
     private final UserRepository userRepository;
 
     // 과제 생성
-    @PostMapping("/task/create")
+    @PostMapping("/create")
     @ResponseStatus(HttpStatus.OK)
     public Taskdto crateTask(@Valid @RequestBody TaskRequest request) throws Exception {
         return taskService.createTask(request);
     }
 
     // 과제 전체 조회
-    @GetMapping("/task/list")
+    @GetMapping("/list")
     public List<TaskListResponse> findAllTask() throws Exception {
         return taskService.findAllTask();
     }
 
     // 과제 검색
-    @GetMapping("/task/list/search")
+    @GetMapping("/list/search")
     public List<TaskListResponse> Search(@RequestParam(value = "keyword") String keyword) throws Exception {
         return taskService.search(keyword);
     }
 
     // 과제 표시
-    @GetMapping("/task/read/{id}")
+    @GetMapping("/read/{id}")
     public TaskReadDTO readTask(@PathVariable Long id) {
         Optional<TaskReadDTO> task = taskRepository.findProjectedById(id);
         return task.get();
     }
 
-    @PostMapping("/task/read/{id}/submit")
+    @PostMapping("/read/{id}/submit")
     public String submit(@PathVariable Long id, @RequestBody AnswerWrapper wrapper) {
 //        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 //        String currentUsername = authentication.getName();
