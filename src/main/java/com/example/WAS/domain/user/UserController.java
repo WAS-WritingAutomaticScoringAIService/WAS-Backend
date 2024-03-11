@@ -9,7 +9,8 @@ import java.util.Map;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/user")
+@RequestMapping(value = "/user", produces = "application/json")
+@CrossOrigin(origins = "http://front-server.com") // 컨트롤러에서 설정
 public class UserController {
 
     private final UserService userService;

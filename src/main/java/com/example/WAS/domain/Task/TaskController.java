@@ -18,6 +18,8 @@ import java.util.Optional;
 
 @RestController
 @RequiredArgsConstructor
+@RequestMapping(value = "/task", produces = "application/json")
+@CrossOrigin(origins = "http://front-server.com") // 컨트롤러에서 설정
 public class TaskController {
 
     private final TaskRepository taskRepository;
