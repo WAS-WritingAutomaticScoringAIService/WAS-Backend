@@ -52,4 +52,6 @@ public class Task {
     @OneToMany(mappedBy = "task", cascade = CascadeType.ALL)
     private List<Answer> answers = new ArrayList<>();
 
+    //test
+
 }
