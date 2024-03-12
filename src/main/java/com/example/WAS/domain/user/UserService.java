@@ -14,8 +14,7 @@ public interface UserService {
     Long signUp(SignUpRequest request) throws Exception;
     String login(Map<String, String> users);
     List<Long> getAllUserId();
-
-    // void updateProfile(String username, UpdateProfileRequest updateProfileRequest);
-
+    Long getLoginUser();
+    User getUserById(Long id);
 
 }

@@ -35,12 +35,4 @@ public class TaskRequest {
                 .questions(questions)
                 .build();
     }
-
-//    public void TaskDto() {
-//        this.questions = new ArrayList<>();
-//    }
-
-    public void addQuestion(Question question) {
-        this.questions.add(question);
-    }
 }

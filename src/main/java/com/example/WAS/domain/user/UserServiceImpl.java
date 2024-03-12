@@ -1,13 +1,19 @@
 package com.example.WAS.domain.user;
 
 import com.example.WAS.jwt.JwtTokenProvider;
+import io.jsonwebtoken.Claims;
+import io.jsonwebtoken.Jwts;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.bcrypt.BCrypt;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -36,12 +42,10 @@ public class UserServiceImpl implements UserService {
         User user = userRepository.save(request.toEntity());
 
         String password = user.getPassword();
-
         String salt = BCrypt.gensalt();
         String hashedPassword = BCrypt.hashpw(password, salt);
 
         user.setPassword(hashedPassword);
-
 
         user.addUserAuthority();
         return user.getId();
@@ -66,8 +70,6 @@ public class UserServiceImpl implements UserService {
 
         System.out.println("OK");
         return jwtTokenProvider.createToken(user.getUsername(), roles);
-
-
     }
 
     @Override
@@ -79,6 +81,21 @@ public class UserServiceImpl implements UserService {
         }
         return idList;
     }
+
+    public User getUserById(Long id){
+        return userRepository.findById(id).orElseThrow(()->
+                new ResponseStatusException(HttpStatus.NOT_FOUND, "해당하는 회원이 없습니다."));
+    }
+
+    public Long getLoginUser(){
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        if(authentication.getPrincipal().equals("anonymousUser")){
+            throw new ResponseStatusException(HttpStatus.UNAUTHORIZED,"다시 로그인하세요");
+        }
+        User user = (User) authentication.getPrincipal();
+        return user.getId();
+    }
+
 
 
 }

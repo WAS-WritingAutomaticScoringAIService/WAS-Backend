@@ -1,27 +1,30 @@
 package com.example.WAS.domain.Task;
 
+import com.example.WAS.domain.question.Question;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.Setter;
 
 
 import java.time.LocalDateTime;
+import java.util.List;
+import java.util.Optional;
 
 @Getter
-@AllArgsConstructor
+@Setter
 public class TaskResponse {
 
     private String title;
     private String subject;
     // 분반
     private String cls;
-    private LocalDateTime startTime;
-    private LocalDateTime endTime;
+    private List<Question> questions;
 
     public TaskResponse(Task task) {
         this.title = task.getTitle();
         this.subject = task.getSubject();
         this.cls = task.getCls();
-        this.startTime = task.getStartTime();
-        this.endTime = task.getEndTime();
+        this.questions = task.getQuestions();
     }
+
 }

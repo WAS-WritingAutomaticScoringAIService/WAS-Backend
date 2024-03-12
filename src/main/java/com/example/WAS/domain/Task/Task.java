@@ -2,6 +2,7 @@ package com.example.WAS.domain.Task;
 
 import com.example.WAS.domain.answer.Answer;
 import com.example.WAS.domain.question.Question;
+import com.example.WAS.domain.student.Student;
 import com.example.WAS.domain.user.User;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.*;
@@ -52,6 +53,8 @@ public class Task {
     @OneToMany(mappedBy = "task", cascade = CascadeType.ALL)
     private List<Answer> answers = new ArrayList<>();
 
-    //test
+    @JsonManagedReference
+    @OneToMany(mappedBy = "task", cascade = CascadeType.ALL)
+    private List<Student> students = new ArrayList<>();
 
 }

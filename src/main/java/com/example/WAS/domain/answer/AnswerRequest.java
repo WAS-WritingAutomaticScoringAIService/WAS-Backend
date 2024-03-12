@@ -14,13 +14,4 @@ public class AnswerRequest {
     private String content;
     private Question question;
 
-//    public Answer toEntity() {
-//        Answer answers Answer.builder()
-//                .id(id)
-//                .StudentId(StudentId)
-//                .number(number)
-//                .content(content)
-//                .question()
-//    }
-
 }

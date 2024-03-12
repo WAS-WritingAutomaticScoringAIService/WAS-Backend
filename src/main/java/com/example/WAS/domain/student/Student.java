@@ -1,10 +1,9 @@
-package com.example.WAS.domain.answer;
+package com.example.WAS.domain.student;
 
 import com.example.WAS.domain.Task.Task;
-import com.example.WAS.domain.question.Question;
-import com.example.WAS.domain.student.Student;
-import com.example.WAS.domain.user.User;
+import com.example.WAS.domain.answer.Answer;
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.*;
 
 import javax.persistence.*;
@@ -12,19 +11,17 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Builder
-@Entity
 @Getter
 @Setter
+@Entity
 @AllArgsConstructor
 @NoArgsConstructor
-public class Answer {
+@Table(name = "student")
+public class Student {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-
-    @Column(nullable = true)
-    private String content;
 
     @Column(nullable = false)
     private String name;
@@ -32,23 +29,14 @@ public class Answer {
     @Column(nullable = false)
     private Long number;
 
-    @OneToOne
-    @JoinColumn(name = "ques_num")
-    private Question question;
-
     @JsonBackReference
     @ManyToOne
     @JoinColumn(name = "task_id")
     private Task task;
 
-    //@JsonBackReference
-    @ManyToOne
-    @JoinColumn(name = "student_id")
-    private Student student;
-
-    @ManyToOne
-    @JoinColumn(name = "user_id")
-    private User user;
+    //@JsonManagedReference
+    @OneToMany(mappedBy = "student", cascade = CascadeType.ALL)
+    private List<Answer> answers = new ArrayList<>();
 
 
 }
