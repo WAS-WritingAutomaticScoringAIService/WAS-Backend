@@ -11,6 +11,7 @@ import java.time.LocalDateTime;
 // 게시판 전체 목록 조회 시 넘겨줄 response
 public class TaskListResponse {
 
+    private Long id;
     private String title;
     private String subject;
     // 분반
@@ -18,6 +19,7 @@ public class TaskListResponse {
     private LocalDateTime endTime;
 
     public TaskListResponse(Task task) {
+        this.id = task.getId();
         this.title = task.getTitle();
         this.subject = task.getSubject();
         this.cls = task.getCls();

@@ -9,7 +9,6 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
@@ -56,8 +55,9 @@ public class TaskController {
     @PostMapping("/read/{id}/submit")
     public String submit(@PathVariable Long id, @RequestBody AnswerWrapper wrapper) {
 //        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-//        String currentUsername = authentication.getName();
-//        Optional<User> optionalUser = userRepository.findByUsername(currentUsername);
+//        String currentEmail = authentication.getName();
+//        Optional<User> optionalUser = userRepository.findByEmail(currentEmail);
+//        System.out.println("optionalUser = " + optionalUser);
 //
 //        User user = optionalUser.orElseThrow(() -> new RuntimeException("User not found"));
 
@@ -67,7 +67,7 @@ public class TaskController {
         wrapper.getAnswers().forEach(answerDto -> {
             Answer answer = new Answer();
 
-           // answer.setUser(user);
+//            answer.setUser(user);
             answer.setTask(task);
             answer.setContent(answerDto.getContent());
             answerRepository.save(answer);

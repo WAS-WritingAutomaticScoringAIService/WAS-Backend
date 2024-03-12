@@ -15,11 +15,10 @@ import java.util.Map;
 
 @RequiredArgsConstructor
 @Service
-@Transactional(readOnly = true)
+@Transactional
 public class UserServiceImpl implements UserService {
 
     private final UserRepository userRepository;
-    private final PasswordEncoder passwordEncoder;
     private final JwtTokenProvider jwtTokenProvider;
 
     @Transactional
@@ -62,13 +61,23 @@ public class UserServiceImpl implements UserService {
             throw new IllegalArgumentException("잘못된 비밀번호입니다.");
         }
 
-
         List<String> roles = new ArrayList<>();
         roles.add(user.getRole().name());
 
         System.out.println("OK");
-
         return jwtTokenProvider.createToken(user.getUsername(), roles);
+
+
+    }
+
+    @Override
+    public List<Long> getAllUserId() {
+        List<User> users= userRepository.findAll();
+        List<Long> idList=new ArrayList<>();
+        for(User user:users){
+            idList.add(user.getId());
+        }
+        return idList;
     }
 
 

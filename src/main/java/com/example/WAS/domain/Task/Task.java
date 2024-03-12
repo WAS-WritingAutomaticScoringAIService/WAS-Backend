@@ -40,9 +40,9 @@ public class Task {
     @Column(nullable = false)
     private LocalDateTime endTime;
 
-//    @ManyToOne
-//    @JoinColumn(name = "user_id")
-//    private User user;
+    @ManyToOne
+    @JoinColumn(name = "user_id")
+    private User user;
 
     @JsonManagedReference
     @OneToMany(mappedBy = "task", cascade = CascadeType.ALL)

@@ -4,6 +4,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
 import java.util.Map;
 
 @Service
@@ -12,6 +13,7 @@ public interface UserService {
 
     Long signUp(SignUpRequest request) throws Exception;
     String login(Map<String, String> users);
+    List<Long> getAllUserId();
 
     // void updateProfile(String username, UpdateProfileRequest updateProfileRequest);
 

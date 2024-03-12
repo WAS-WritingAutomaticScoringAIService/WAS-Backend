@@ -38,12 +38,13 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 .and()
                 .authorizeRequests()
-                .antMatchers("/").permitAll()
-                .antMatchers("/task/**").permitAll()
-                .antMatchers("/user/login").permitAll()
-                .antMatchers("/user/join").permitAll()
-                .antMatchers("/user").hasRole("USER")
-                .anyRequest().authenticated();
+                    .antMatchers("/").permitAll()
+                    .antMatchers("/task/**").permitAll()
+                    .antMatchers("/user/login").permitAll()
+
+                    .antMatchers("/user/join").permitAll()
+                    .antMatchers("/user").hasRole("USER")
+                    .anyRequest().authenticated();
     }
 
 

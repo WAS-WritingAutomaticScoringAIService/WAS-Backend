@@ -24,14 +24,6 @@ public class TaskServiceImpl implements TaskService {
     private final TaskRepository taskRepository;
     private final UserRepository userRepository;
     private final QuestionRepository questionRepository;
-    private final AnswerRepository answerRepository;
-
-//    @Override
-//    public Long createTask(TaskRequest request) throws Exception {
-//
-//        Task task = taskRepository.save(request.toEntity());
-//        return task.getId();
-//    }
 
     @Override
     public Taskdto createTask(TaskRequest request) throws Exception {
