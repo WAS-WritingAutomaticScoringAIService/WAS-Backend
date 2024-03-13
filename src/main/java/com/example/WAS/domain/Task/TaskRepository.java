@@ -13,7 +13,6 @@ public interface TaskRepository extends JpaRepository<Task, Long> {
 
     List<Task> findBySubjectContaining(String subject);
     Page<Task> findAll(Pageable pageable);
-    Optional<TaskReadDTO> findProjectedById(Long id);
     // Optional<Task> findById(Long id);
 
 

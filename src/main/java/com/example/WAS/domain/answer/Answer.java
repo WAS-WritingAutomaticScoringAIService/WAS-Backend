@@ -32,9 +32,14 @@ public class Answer {
     @Column(nullable = false)
     private Long number;
 
+    @Column(nullable = true)
+    private String score;
+
     @OneToOne
     @JoinColumn(name = "ques_num")
     private Question question;
+
+
 
     @JsonBackReference
     @ManyToOne
