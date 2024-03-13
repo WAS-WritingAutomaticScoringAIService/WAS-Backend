@@ -9,5 +9,5 @@ import java.util.List;
 @Transactional
 public interface AnswerService {
 
-    List<AnswerListResponse> findAllAnswer();
+   // List<AnswerResponse> findAllAnswer();
 }

@@ -15,9 +15,9 @@ import java.util.List;
 public class AnswerController {
 
     private final AnswerService answerService;
-
-    @GetMapping("/list")
-    public List<AnswerListResponse> getAnswerList() throws Exception {
-        return answerService.findAllAnswer();
-    }
+//
+//    @GetMapping("/list")
+//    public List<AnswerResponse> getAnswerList() throws Exception {
+//        return answerService.findAllAnswer();
+//    }
 }

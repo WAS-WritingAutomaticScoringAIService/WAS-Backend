@@ -13,15 +13,16 @@ import java.util.List;
 public class AnswerServiceImpl implements AnswerService {
 
     private final AnswerRepository answerRepository;
-
-    // 모든 답변 가져오기
-    public List<AnswerListResponse> findAllAnswer() {
-        List<Answer> answers = answerRepository.findAll();
-        List<AnswerListResponse> responses = new ArrayList<>();
-
-        for (Answer answer : answers) {
-            responses.add(new AnswerListResponse(answer));
-        }
-        return responses;
-    }
+//
+//    // 모든 답변 가져오기
+//    public List<AnswerResponse> findAllAnswer() {
+//        List<Answer> answers = answerRepository.findAll();
+//        List<AnswerResponse> responses = new ArrayList<>();
+//
+//        for (Answer answer : answers) {
+//            responses.set
+//            responses.add(new AnswerResponse(answer));
+//        }
+//        return responses;
+//    }
 }

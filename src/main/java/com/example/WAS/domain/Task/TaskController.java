@@ -1,6 +1,7 @@
 package com.example.WAS.domain.Task;
 
 import com.example.WAS.domain.answer.Answer;
+import com.example.WAS.domain.answer.AnswerListResponse;
 import com.example.WAS.domain.answer.AnswerRepository;
 import com.example.WAS.domain.answer.AnswerWrapper;
 import com.example.WAS.domain.question.Question;
@@ -96,7 +97,9 @@ public class TaskController {
         return "Questions received";
     }
 
-
-    //test
+    @GetMapping("/{id}/answerList")
+    public AnswerListResponse getAnswerList(@PathVariable Long id) {
+        return taskService.getAnswersByTaskId(id);
+    }
 
 }

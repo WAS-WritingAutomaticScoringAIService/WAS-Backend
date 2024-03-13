@@ -1,6 +1,7 @@
 package com.example.WAS.domain.Task;
 
 import com.example.WAS.domain.answer.Answer;
+import com.example.WAS.domain.answer.AnswerListResponse;
 import com.example.WAS.domain.answer.AnswerRepository;
 import com.example.WAS.domain.answer.AnswerRequest;
 import com.example.WAS.domain.question.Question;
@@ -11,6 +12,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.PathVariable;
 
+import javax.persistence.EntityNotFoundException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -92,6 +94,23 @@ public class TaskServiceImpl implements TaskService {
 
         return responses;
     }
+
+    // 답변 List 조회
+    @Override
+    public AnswerListResponse getAnswersByTaskId(Long taskId) {
+        Task task = taskRepository.findById(taskId)
+                .orElseThrow(() -> new EntityNotFoundException("Task not found"));
+        // Task 엔티티에서 title을 가져옴
+        String title = task.getTitle();
+        String subject = task.getSubject();
+        String cls = task.getCls();
+        // Question 엔티티와 연관된 Answer 엔티티들을 가져옴
+        List<Answer> answers = task.getAnswers();
+
+        // AnswerListResponse 객체를 생성하여 반환
+        return new AnswerListResponse(title, subject, cls, answers);
+    }
+
 
 
 
