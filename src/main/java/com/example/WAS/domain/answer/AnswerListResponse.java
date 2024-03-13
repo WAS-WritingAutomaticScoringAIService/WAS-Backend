@@ -15,7 +15,9 @@ public class AnswerListResponse {
     private List<AnswerResponse> answers;
 
     public AnswerListResponse(String title, String subject, String cls, List<Answer> answers) {
-        this.title = getTitle();
+        this.title = title;
+        this.subject = subject;
+        this.cls = cls;
         this.answers = answers.stream()
                 .map(AnswerResponse::new)
                 .collect(Collectors.toList());

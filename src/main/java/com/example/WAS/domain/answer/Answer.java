@@ -39,8 +39,6 @@ public class Answer {
     @JoinColumn(name = "ques_num")
     private Question question;
 
-
-
     @JsonBackReference
     @ManyToOne
     @JoinColumn(name = "task_id")
