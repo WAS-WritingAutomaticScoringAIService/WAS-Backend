@@ -102,7 +102,6 @@ public class TaskServiceImpl implements TaskService {
                 .orElseThrow(() -> new EntityNotFoundException("Task not found"));
         // Task 엔티티에서 title을 가져옴
         String title = task.getTitle();
-        System.out.println("title = " + title);
         String subject = task.getSubject();
         String cls = task.getCls();
         // Question 엔티티와 연관된 Answer 엔티티들을 가져옴

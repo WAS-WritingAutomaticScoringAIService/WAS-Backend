@@ -10,4 +10,6 @@ import java.util.List;
 public interface AnswerService {
 
    // List<AnswerResponse> findAllAnswer();
+
+    AnswerDetailResponse getAnswerDetail(Long number);
 }

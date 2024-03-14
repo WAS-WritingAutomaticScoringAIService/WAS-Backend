@@ -9,4 +9,6 @@ import java.util.List;
 public interface AnswerRepository extends JpaRepository<Answer, Long> {
 
     List<Answer> findAll();
+
+    Answer findByNumber(Long Number);
 }

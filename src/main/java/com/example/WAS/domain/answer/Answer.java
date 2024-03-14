@@ -44,10 +44,10 @@ public class Answer {
     @JoinColumn(name = "task_id")
     private Task task;
 
-    //@JsonBackReference
-    @ManyToOne
-    @JoinColumn(name = "student_id")
-    private Student student;
+//    //@JsonBackReference
+//    @ManyToOne
+//    @JoinColumn(name = "student_id")
+//    private Student student;
 
     @ManyToOne
     @JoinColumn(name = "user_id")

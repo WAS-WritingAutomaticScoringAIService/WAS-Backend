@@ -34,9 +34,9 @@ public class Student {
     @JoinColumn(name = "task_id")
     private Task task;
 
-    //@JsonManagedReference
-    @OneToMany(mappedBy = "student", cascade = CascadeType.ALL)
-    private List<Answer> answers = new ArrayList<>();
+//    //@JsonManagedReference
+//    @OneToMany(mappedBy = "student", cascade = CascadeType.ALL)
+//    private List<Answer> answers = new ArrayList<>();
 
 
 }
