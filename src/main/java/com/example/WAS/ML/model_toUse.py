@@ -7,9 +7,21 @@ from sklearn.ensemble import GradientBoostingRegressor
 from sklearn.model_selection import cross_val_score
 import pandas as pd
 import numpy as np
+import os
+
+
+print(os.getcwd())
 
 # Load data
-train_data = pd.read_csv('com/example/WAS/ML/train_data_num.csv')  # Assuming the training data is in CSV format with columns: student_id, essay, grade
+# 현재 작업 디렉토리를 변경하고자 할 때
+#os.chdir(r'C:\Users\박영선\Desktop\코코톤\spring\WAS\WAS\src\main\java\com\example\WAS\ML')
+
+# 현재 작업 디렉토리의 경로를 얻고자 할 때
+current_directory = os.getcwd()
+print(current_directory)
+
+train_data = pd.read_csv('train_data_num.csv')  # Assuming the training data is in CSV format with columns: student_id, essay, grade
+
 
 # Tokenize essays using KoNLPy (Okt)
 okt = Okt()
