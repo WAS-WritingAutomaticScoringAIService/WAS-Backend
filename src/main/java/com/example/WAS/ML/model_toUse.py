@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 from konlpy.tag import Okt
 from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.model_selection import train_test_split
@@ -7,14 +8,19 @@ from sklearn.ensemble import GradientBoostingRegressor
 from sklearn.model_selection import cross_val_score
 import pandas as pd
 import numpy as np
+import sys
+import io
 import os
 
+# 한글로 인코딩 (글자 깨짐 방지)
+sys.stdout = io.TextIOWrapper(sys.stdout.detach(), encoding='utf-8')
+sys.stderr = io.TextIOWrapper(sys.stderr.detach(), encoding='utf-8')
 
 print(os.getcwd())
 
 # Load data
 # 현재 작업 디렉토리를 변경하고자 할 때
-#os.chdir(r'C:\Users\박영선\Desktop\코코톤\spring\WAS\WAS\src\main\java\com\example\WAS\ML')
+# os.chdir(r'C:\Users\박영선\Desktop\코코톤\spring\WAS\WAS\src\main\java\com\example\WAS\ML')
 
 # 현재 작업 디렉토리의 경로를 얻고자 할 때
 current_directory = os.getcwd()
