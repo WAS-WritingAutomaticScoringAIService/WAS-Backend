@@ -5,6 +5,7 @@ import org.springframework.stereotype.Service;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.concurrent.TimeUnit;
 
 @Service
 public class TensorFlowService {
@@ -37,22 +38,28 @@ public class TensorFlowService {
 
             System.out.println("output = " + output);
 
-            int exitCode = process.waitFor();
-            if (exitCode == 0) {
-                // Python 스크립트의 실행이 성공적으로 완료되었다면 결과를 반환합니다.
-
-
+            boolean finished = process.waitFor(10, TimeUnit.SECONDS);
+            if (finished && process.exitValue() == 0) {
+                // 프로세스가 성공적으로 완료되고 타임아웃 내에 종료되었다면 결과를 반환합니다.
                 return extractResult(output.toString());
             } else {
-                // 에러 처리
-                return "실행 중 에러 발생";
+                // 타임아웃이 발생하거나 프로세스가 비정상적으로 종료되었다면 에러 메시지를 반환합니다.
+                return "실행 중 에러 발생 또는 타임아웃";
             }
+//            int exitCode = process.waitFor();
+//            if (exitCode == 0) {
+//                // Python 스크립트의 실행이 성공적으로 완료되었다면 결과를 반환합니다.
+//
+//
+//                return extractResult(output.toString());
+//            } else {
+//                // 에러 처리
+//                return "실행 중 에러 발생";
+//            }
         } catch (IOException | InterruptedException e) {
             Thread.currentThread().interrupt();
             throw new RuntimeException("Python 스크립트 실행 중 에러 발생", e);
-
         }
-
     }
 
     // 결과값 추출

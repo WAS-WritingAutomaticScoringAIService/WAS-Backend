@@ -6,6 +6,7 @@ from sklearn.ensemble import RandomForestRegressor
 from sklearn.metrics import mean_squared_error
 from sklearn.ensemble import GradientBoostingRegressor
 from sklearn.model_selection import cross_val_score
+from concurrent.futures import ThreadPoolExecutor, TimeoutError
 import pandas as pd
 import numpy as np
 import sys
@@ -22,6 +23,7 @@ print(os.getcwd())
 # 현재 작업 디렉토리를 변경하고자 할 때
 # os.chdir(r'C:\Users\박영선\Desktop\코코톤\spring\WAS\WAS\src\main\java\com\example\WAS\ML')
 
+# EC2 환경
 os.chdir(r'~/action/build/libs')
 # # 현재 작업 디렉토리의 경로를 얻고자 할 때
 current_directory = os.getcwd()
