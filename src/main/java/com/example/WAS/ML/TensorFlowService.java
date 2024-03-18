@@ -37,15 +37,6 @@ public class TensorFlowService {
             System.out.println("errorGobbler = " + errorGobbler);
             errorGobbler.start();
 
-            // 여기에서 타임아웃을 설정합니다. 타임아웃은 30초로 설정합니다.
-            boolean finished = process.waitFor(20, TimeUnit.SECONDS);
-            System.out.println("finished = " + finished);
-            if (!finished) { // 타임아웃 발생시
-                process.destroy(); // 프로세스 강제 종료
-                System.out.println("finished = " + finished);
-                return "실행 중 에러 발생 또는 타임아웃";
-            }
-
 //            BufferedReader errorReader = new BufferedReader(new InputStreamReader(process.getErrorStream()));
 //            String errorLine;
 //            while ((errorLine = errorReader.readLine()) != null) {
@@ -65,10 +56,13 @@ public class TensorFlowService {
 //            System.out.println("output = " + output);
 
             int exitCode = process.waitFor();
+            System.out.println("exitCode = " + exitCode);
             if (exitCode == 0) {
                 // Python 스크립트의 실행이 성공적으로 완료되었다면 결과를 반환합니다.
 //                return extractResult(output.toString());
+
                 return extractResult(outputGobbler.getOutput().toString());
+
             } else {
                 // 에러 처리
                 return "실행 중 에러 발생";
