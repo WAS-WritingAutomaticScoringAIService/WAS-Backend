@@ -4,6 +4,7 @@ import org.springframework.stereotype.Service;
 
 import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.concurrent.TimeUnit;
 
@@ -15,14 +16,23 @@ public class TensorFlowService {
 
         System.out.println("textData = " + textData);
         // EC2 환경
-        //ProcessBuilder processBuilder = new ProcessBuilder("/usr/bin/python3", "model_toUse.py", textData);
-        ProcessBuilder processBuilder = new ProcessBuilder("python3", "model_toUse.py", textData);
+        ProcessBuilder processBuilder = new ProcessBuilder("/usr/bin/python3", "model_toUse.py", textData);
+//        ProcessBuilder processBuilder = new ProcessBuilder("python3", "model_toUse.py", textData);
+        // local 환경
+//        ProcessBuilder processBuilder = new ProcessBuilder("C:\\Anaconda\\python.exe", "C:\\Users\\박영선\\Desktop\\코코톤\\spring\\WAS\\WAS\\src\\main\\java\\com\\example\\WAS\\ML\\model_toUse.py", textData);
         System.out.println("processBuilder = " + processBuilder);
         processBuilder.redirectErrorStream(true); // 표준 에러 출력을 표준 출력으로 리다이렉트
-        // local 환경
-        //ProcessBuilder processBuilder = new ProcessBuilder("C:\\Anaconda\\python.exe", "C:\\Users\\박영선\\Desktop\\코코톤\\spring\\WAS\\WAS\\src\\main\\java\\com\\example\\WAS\\ML\\model_toUse.py", textData);
+        System.out.println("processBuilder.redirectErrorStream() = " + processBuilder.redirectErrorStream());
+
         try {
             Process process = processBuilder.start();
+
+            StreamGobbler outputGobbler = new StreamGobbler(process.getInputStream(), "OUTPUT");
+            StreamGobbler errorGobbler = new StreamGobbler(process.getErrorStream(), "ERROR");
+
+            // 스트림 읽기 시작
+            outputGobbler.start();
+            errorGobbler.start();
 
             // 여기에서 타임아웃을 설정합니다. 타임아웃은 30초로 설정합니다.
             boolean finished = process.waitFor(20, TimeUnit.SECONDS);
@@ -77,5 +87,33 @@ public class TensorFlowService {
             return "결과를 찾을 수 없습니다.";
         }
     }
+
+    // 스트림을 처리하기 위한 내부 클래스
+    private static class StreamGobbler extends Thread {
+        private InputStreamReader inputStream;
+        private String type;
+        private StringBuilder output = new StringBuilder();
+
+        public StreamGobbler(InputStream inputStream, String type) {
+            this.inputStream = new InputStreamReader(inputStream);
+            this.type = type;
+        }
+
+        public void run() {
+            try (BufferedReader br = new BufferedReader(inputStream)) {
+                String line = null;
+                while ((line = br.readLine()) != null) {
+                    output.append(line + "\n");
+                }
+            } catch (IOException ioe) {
+                ioe.printStackTrace();
+            }
+        }
+
+        public StringBuilder getOutput() {
+            return output;
+        }
+    }
+
 
 }

@@ -21,10 +21,10 @@ sys.stderr = io.TextIOWrapper(sys.stderr.detach(), encoding='utf-8')
 
 # Load data
 # 현재 작업 디렉토리를 변경하고자 할 때
-#os.chdir(r'C:\Users\박영선\Desktop\코코톤\spring\WAS\WAS\src\main\java\com\example\WAS\ML')
+# os.chdir(r'C:\Users\박영선\Desktop\코코톤\spring\WAS\WAS\src\main\java\com\example\WAS\ML')
 
 # EC2 환경
-os.chdir(r'~/action/build/libs')
+# os.chdir(r'~/action/build/libs')
 # # 현재 작업 디렉토리의 경로를 얻고자 할 때
 # current_directory = os.getcwd()
 
