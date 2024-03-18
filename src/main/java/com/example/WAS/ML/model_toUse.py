@@ -29,7 +29,6 @@ print(current_directory)
 
 train_data = pd.read_csv('train_data_num.csv')  # Assuming the training data is in CSV format with columns: student_id, essay, grade
 
-
 # Tokenize essays using KoNLPy (Okt)
 okt = Okt()
 
