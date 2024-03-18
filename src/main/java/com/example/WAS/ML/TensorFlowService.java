@@ -13,9 +13,12 @@ public class TensorFlowService {
 // 텍스트 데이터를 받아 Python 스크립트로 처리하고 결과를 반환합니다.
     public String predict(String textData) {
 
+        System.out.println("textData = " + textData);
         // EC2 환경
         //ProcessBuilder processBuilder = new ProcessBuilder("/usr/bin/python3", "model_toUse.py", textData);
         ProcessBuilder processBuilder = new ProcessBuilder("python3", "model_toUse.py", textData);
+        System.out.println("processBuilder = " + processBuilder);
+        processBuilder.redirectErrorStream(true); // 표준 에러 출력을 표준 출력으로 리다이렉트
         // local 환경
         //ProcessBuilder processBuilder = new ProcessBuilder("C:\\Anaconda\\python.exe", "C:\\Users\\박영선\\Desktop\\코코톤\\spring\\WAS\\WAS\\src\\main\\java\\com\\example\\WAS\\ML\\model_toUse.py", textData);
         try {
