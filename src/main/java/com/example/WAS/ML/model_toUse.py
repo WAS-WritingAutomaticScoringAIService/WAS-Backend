@@ -17,17 +17,16 @@ import os
 sys.stdout = io.TextIOWrapper(sys.stdout.detach(), encoding='utf-8')
 sys.stderr = io.TextIOWrapper(sys.stderr.detach(), encoding='utf-8')
 
-print(os.getcwd())
+# print(os.getcwd())
 
 # Load data
 # 현재 작업 디렉토리를 변경하고자 할 때
-# os.chdir(r'C:\Users\박영선\Desktop\코코톤\spring\WAS\WAS\src\main\java\com\example\WAS\ML')
+os.chdir(r'C:\Users\박영선\Desktop\코코톤\spring\WAS\WAS\src\main\java\com\example\WAS\ML')
 
 # EC2 환경
-os.chdir(r'~/action/build/libs')
+# os.chdir(r'~/action/build/libs')
 # # 현재 작업 디렉토리의 경로를 얻고자 할 때
-current_directory = os.getcwd()
-print(current_directory)
+# current_directory = os.getcwd()
 
 train_data = pd.read_csv('train_data_num.csv')  # Assuming the training data is in CSV format with columns: student_id, essay, grade
 
