@@ -28,11 +28,11 @@ public class TensorFlowService {
                 return "실행 중 에러 발생 또는 타임아웃";
             }
 
-            BufferedReader errorReader = new BufferedReader(new InputStreamReader(process.getErrorStream()));
-            String errorLine;
-            while ((errorLine = errorReader.readLine()) != null) {
-                System.out.println("Error: " + errorLine);
-            }
+//            BufferedReader errorReader = new BufferedReader(new InputStreamReader(process.getErrorStream()));
+//            String errorLine;
+//            while ((errorLine = errorReader.readLine()) != null) {
+//                System.out.println("Error: " + errorLine);
+//            }
 
             // Python 스크립트의 출력을 읽어옵니다.
             BufferedReader reader = new BufferedReader(new InputStreamReader(process.getInputStream()));
@@ -40,7 +40,7 @@ public class TensorFlowService {
             StringBuilder output = new StringBuilder();
             while ((line = reader.readLine()) != null) {
                 output.append(line);
-                System.out.println("line = " + line);
+                // System.out.println("line = " + line);
             }
 
             System.out.println("output = " + output);
@@ -48,8 +48,6 @@ public class TensorFlowService {
             int exitCode = process.waitFor();
             if (exitCode == 0) {
                 // Python 스크립트의 실행이 성공적으로 완료되었다면 결과를 반환합니다.
-
-
                 return extractResult(output.toString());
             } else {
                 // 에러 처리
