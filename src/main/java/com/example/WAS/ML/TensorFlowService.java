@@ -26,18 +26,23 @@ public class TensorFlowService {
 
         try {
             Process process = processBuilder.start();
+            System.out.println("process = " + process);
 
             StreamGobbler outputGobbler = new StreamGobbler(process.getInputStream(), "OUTPUT");
+            System.out.println("outputGobbler = " + outputGobbler);
             StreamGobbler errorGobbler = new StreamGobbler(process.getErrorStream(), "ERROR");
 
             // 스트림 읽기 시작
             outputGobbler.start();
+            System.out.println("errorGobbler = " + errorGobbler);
             errorGobbler.start();
 
             // 여기에서 타임아웃을 설정합니다. 타임아웃은 30초로 설정합니다.
             boolean finished = process.waitFor(20, TimeUnit.SECONDS);
+            System.out.println("finished = " + finished);
             if (!finished) { // 타임아웃 발생시
                 process.destroy(); // 프로세스 강제 종료
+                System.out.println("finished = " + finished);
                 return "실행 중 에러 발생 또는 타임아웃";
             }
 
@@ -48,20 +53,22 @@ public class TensorFlowService {
 //            }
 
             // Python 스크립트의 출력을 읽어옵니다.
-            BufferedReader reader = new BufferedReader(new InputStreamReader(process.getInputStream()));
-            String line;
-            StringBuilder output = new StringBuilder();
-            while ((line = reader.readLine()) != null) {
-                output.append(line);
-                // System.out.println("line = " + line);
-            }
-
-            System.out.println("output = " + output);
+//            BufferedReader reader = new BufferedReader(new InputStreamReader(process.getInputStream()));
+//
+//            String line;
+//            StringBuilder output = new StringBuilder();
+//            while ((line = reader.readLine()) != null) {
+//                output.append(line);
+//                // System.out.println("line = " + line);
+//            }
+//
+//            System.out.println("output = " + output);
 
             int exitCode = process.waitFor();
             if (exitCode == 0) {
                 // Python 스크립트의 실행이 성공적으로 완료되었다면 결과를 반환합니다.
-                return extractResult(output.toString());
+//                return extractResult(output.toString());
+                return extractResult(outputGobbler.getOutput().toString());
             } else {
                 // 에러 처리
                 return "실행 중 에러 발생";
