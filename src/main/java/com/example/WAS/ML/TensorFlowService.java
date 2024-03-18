@@ -14,8 +14,8 @@ public class TensorFlowService {
     public String predict(String textData) {
 
         // EC2 환경
-        ProcessBuilder processBuilder = new ProcessBuilder("/usr/bin/python3", "model_toUse.py", textData);
-
+        //ProcessBuilder processBuilder = new ProcessBuilder("/usr/bin/python3", "model_toUse.py", textData);
+        ProcessBuilder processBuilder = new ProcessBuilder("python3", "model_toUse.py", textData);
         // local 환경
         //ProcessBuilder processBuilder = new ProcessBuilder("C:\\Anaconda\\python.exe", "C:\\Users\\박영선\\Desktop\\코코톤\\spring\\WAS\\WAS\\src\\main\\java\\com\\example\\WAS\\ML\\model_toUse.py", textData);
         try {
