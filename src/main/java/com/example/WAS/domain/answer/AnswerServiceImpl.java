@@ -1,5 +1,6 @@
 package com.example.WAS.domain.answer;
 
+import com.example.WAS.ML.TensorFlowService;
 import com.example.WAS.domain.Task.Task;
 import com.example.WAS.domain.question.Question;
 import lombok.RequiredArgsConstructor;
@@ -15,19 +16,9 @@ import java.util.List;
 public class AnswerServiceImpl implements AnswerService {
 
     private final AnswerRepository answerRepository;
-//
-//    // 모든 답변 가져오기
-//    public List<AnswerResponse> findAllAnswer() {
-//        List<Answer> answers = answerRepository.findAll();
-//        List<AnswerResponse> responses = new ArrayList<>();
-//
-//        for (Answer answer : answers) {
-//            responses.set
-//            responses.add(new AnswerResponse(answer));
-//        }
-//        return responses;
-//    }
+    private final TensorFlowService tensorFlowService;
 
+    // 상세 답변 조회
     public AnswerDetailResponse getAnswerDetail(Long number) {
         Answer answer = answerRepository.findByNumber(number);
 
@@ -44,5 +35,12 @@ public class AnswerServiceImpl implements AnswerService {
         String content = answer.getContent();
 
         return new AnswerDetailResponse(title, subject, questionContent, name, content);
+    }
+
+    public String saveScore(String content) {
+
+        String score = tensorFlowService.predict(content);
+
+        return score;
     }
 }

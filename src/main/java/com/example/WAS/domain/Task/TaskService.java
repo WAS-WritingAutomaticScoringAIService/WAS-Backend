@@ -16,6 +16,5 @@ public interface TaskService {
     public List<TaskListResponse> search(String keyword);
     public List<TaskListResponse> findAllTask();
     AnswerListResponse getAnswersByTaskId(Long taskId);
-//    public TaskSubmitDTO submit(TaskSubmitDTO taskSubmitDTO);
 
 }

@@ -1,5 +1,6 @@
 package com.example.WAS.domain.Task;
 
+import com.example.WAS.ML.TensorFlowService;
 import com.example.WAS.domain.answer.Answer;
 import com.example.WAS.domain.answer.AnswerListResponse;
 import com.example.WAS.domain.answer.AnswerRepository;
@@ -31,7 +32,7 @@ public class TaskController {
     private final TaskRepository taskRepository;
     private final TaskService taskService;
     private final AnswerRepository answerRepository;
-    private final QuestionRepository questionRepository;
+    private final TensorFlowService tensorFlowService;
     private final StudentRepository studentRepository;
     private final UserService userService;
     private final UserRepository userRepository;
@@ -67,13 +68,6 @@ public class TaskController {
 
     @PostMapping("/read/{id}/submit")
     public String submit(@PathVariable Long id, @RequestBody AnswerWrapper wrapper) {
-//        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-//        String currentEmail = authentication.getName();
-//        Optional<User> optionalUser = userRepository.findByEmail(currentEmail);
-//        System.out.println("optionalUser = " + optionalUser);
-//        User user = optionalUser.orElseThrow(() -> new RuntimeException("User not found"));
-
-//        User user = userService.getUserById(userService.getLoginUser());
 
         Task task = taskRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Task not found"));
@@ -91,6 +85,8 @@ public class TaskController {
             answer.setName(answerDto.getName());
             answer.setNumber(answerDto.getNumber());
             answer.setContent(answerDto.getContent());
+            System.out.println("answerDto.getContent() = " + answer.getContent());
+            answer.setScore(tensorFlowService.predict(answer.getContent()));
             answerRepository.save(answer);
         });
 

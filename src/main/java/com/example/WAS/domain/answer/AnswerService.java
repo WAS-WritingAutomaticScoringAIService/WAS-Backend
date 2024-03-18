@@ -12,4 +12,5 @@ public interface AnswerService {
    // List<AnswerResponse> findAllAnswer();
 
     AnswerDetailResponse getAnswerDetail(Long number);
+    String saveScore(String content);
 }
