@@ -86,8 +86,9 @@ public class TaskController {
             answer.setNumber(answerDto.getNumber());
             answer.setContent(answerDto.getContent());
             System.out.println("answerDto.getContent() = " + answer.getContent());
-            answer.setScore(tensorFlowService.predict(answer.getContent()));
-            answerRepository.save(answer);
+            answer.setScore("중");
+//            answer.setScore(tensorFlowService.predict(answer.getContent()));
+//            answerRepository.save(answer);
         });
 
         return "Questions received";
