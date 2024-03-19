@@ -86,7 +86,7 @@ public class TaskController {
             answer.setNumber(answerDto.getNumber());
             answer.setContent(answerDto.getContent());
             System.out.println("answerDto.getContent() = " + answer.getContent());
-            answer.setScore("중");
+//            answer.setScore("중");
 //            answer.setScore(tensorFlowService.predict(answer.getContent()));
 //            answerRepository.save(answer);
         });
