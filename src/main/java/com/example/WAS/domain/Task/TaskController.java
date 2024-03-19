@@ -72,23 +72,18 @@ public class TaskController {
         Task task = taskRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Task not found"));
 
-//        Student student = studentRepository.save(request.toEntity());
-//        student.setTask(task);
-
         wrapper.getAnswers().forEach(answerDto -> {
             Answer answer = new Answer();
 
-//            answer.setUser(user);
-
-//            answer.setStudent(student);
             answer.setTask(task);
             answer.setName(answerDto.getName());
             answer.setNumber(answerDto.getNumber());
             answer.setContent(answerDto.getContent());
             System.out.println("answerDto.getContent() = " + answer.getContent());
-//            answer.setScore("중");
+            answer.setScore("중"); // Dummy
+//            System.out.println(answer.getScore());
 //            answer.setScore(tensorFlowService.predict(answer.getContent()));
-//            answerRepository.save(answer);
+            answerRepository.save(answer);
         });
 
         return "Questions received";
